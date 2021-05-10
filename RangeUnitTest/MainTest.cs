@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RangeUnitTest.Base;
@@ -76,9 +77,9 @@ namespace RangeUnitTest
             var contactsArray = MockedData.ReadContacts().ToArray();
             var contacts = contactsArray.ContactsListIndices();
 
-            var range = contacts.BetweenContacts(firstContact, lastContact);
-
-            var citiesBetweenTwoCities = contactsArray[range.startIndex..range.endIndex];
+            var (startIndex, endIndex) = contacts.BetweenContacts(firstContact, lastContact);
+            
+            var citiesBetweenTwoCities = contactsArray[startIndex..endIndex];
             
             Assert.IsTrue(citiesBetweenTwoCities.SequenceEqual(ExpectedContacts, 
                 new ContactIdFirstNameLastNameEqualityComparer()));
@@ -102,6 +103,28 @@ namespace RangeUnitTest
             Assert.IsTrue(citiesBetweenTwoCities.SequenceEqual(ExpectedCities));
 
         }
+
+        [TestMethod]
+        public void StringArray_StartFrom_Index()
+        {
+            string[] oregonCities = FileOperations.OregonCitiesFirstTen();
+            Range range = Range.StartAt(5);
+            var fiveCities = oregonCities[range];
+
+            Assert.IsTrue(fiveCities.SequenceEqual(FiveCitiesFromIndex));   
+        }
+
+        [TestMethod]
+        public void StringArray_StartFrom_Beginning()
+        {
+            Range range = Range.EndAt(5);
+            string[] oregonCities = FileOperations.OregonCitiesFirstTen();
+            var fiveCities = oregonCities[range];
+
+            Assert.IsTrue(fiveCities.SequenceEqual(FiveCitiesFromBeginning));
+
+        }
+
 
         [TestMethod]
         [TestTraits(Trait.RangesIndices)]

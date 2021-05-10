@@ -18,7 +18,7 @@ namespace RangeUnitTest
         {
             if (TestContext.TestName == "TestMethod1")
             {
-
+                
             }
         }
         [TestCleanup]
@@ -64,6 +64,23 @@ namespace RangeUnitTest
             "3Q 2014A",
             "4Q 2014A",
             "2014 FYA"
+        };
+
+        public string[] FiveCitiesFromIndex =
+        {
+            "Alpine", 
+            "Alsea", 
+            "Altamont", 
+            "Amity", 
+            "Annex"
+        };
+        public string[] FiveCitiesFromBeginning =
+        {
+            "Adair Village",
+            "Adams",
+            "Adrian",
+            "Albany",
+            "Aloha"
         };
 
         public string[] Words => new [] {
