@@ -12,3 +12,7 @@ Ranges and indices provide a succinct syntax for accessing single elements or ra
 # Microsoft docs
 
 [Explore indexs and ranges](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/tutorials/ranges-indexes)
+
+# See also
+
+[Original GitHub page](https://github.com/karenpayneoregon/karenpayneoregon.github.io/blob/master/csharp/indices-ranges.md)

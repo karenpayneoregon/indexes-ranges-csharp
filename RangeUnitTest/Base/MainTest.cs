@@ -50,8 +50,8 @@ namespace RangeUnitTest
             await Task.Delay(0);
         }
 
-        public DateTime StartDate => new DateTime(Now.Year, Now.Month, 3, 3, 0, 0, 0);
-        public DateTime EndDate => new DateTime(Now.Year, Now.Month, 6, 6, 0, 0, 0);
+        public DateTime StartDate => new(Now.Year, Now.Month, 3, 3, 0, 0, 0);
+        public DateTime EndDate => new(Now.Year, Now.Month, 6, 6, 0, 0, 0);
         public List<DateTime> DateRange => Enumerable.Range(1, 20).Select(value => new DateTime(Now.Year, Now.Month, value, 1, 0, 0, 0)).ToList();
         public List<string> Periods => new()
         {

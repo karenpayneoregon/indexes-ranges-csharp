@@ -53,7 +53,9 @@ namespace RangeUnitTest
             var (startIndex, endIndex) = contacts.BetweenContacts(firstContact, lastContact);
 
             var citiesBetweenTwoCities = contactsArray[startIndex..endIndex];
-            Assert.IsTrue(citiesBetweenTwoCities.SequenceEqual(ExpectedContacts, new ContactIdFirstNameLastNameEqualityComparer()));
+            
+            Assert.IsTrue(citiesBetweenTwoCities.SequenceEqual(ExpectedContacts, 
+                new ContactIdFirstNameLastNameEqualityComparer()));
 
         }
 
@@ -77,7 +79,9 @@ namespace RangeUnitTest
             var range = contacts.BetweenContacts(firstContact, lastContact);
 
             var citiesBetweenTwoCities = contactsArray[range.startIndex..range.endIndex];
-            Assert.IsTrue(citiesBetweenTwoCities.SequenceEqual(ExpectedContacts, new ContactIdFirstNameLastNameEqualityComparer()));
+            
+            Assert.IsTrue(citiesBetweenTwoCities.SequenceEqual(ExpectedContacts, 
+                new ContactIdFirstNameLastNameEqualityComparer()));
 
         }
 
@@ -108,8 +112,6 @@ namespace RangeUnitTest
             
             Assert.IsTrue(result.SequenceEqual(ExpectedPeriod));
         }
-
-
 
     }
 }
