@@ -2,7 +2,7 @@
 
 Ranges and indices provide a succinct syntax for accessing single elements or ranges in a sequence.
 
-**TODO**
+ :heavy_check_mark: Write-up article
 
 ![img](RangeUnitTest/assets/contacts.png)
 
