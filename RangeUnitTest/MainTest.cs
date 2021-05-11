@@ -14,6 +14,9 @@ namespace RangeUnitTest
     [TestClass]
     public partial class MainTest : TestBase
     {
+        /// <summary>
+        /// Get dates between start and end date inclusive 
+        /// </summary>
         [TestMethod]
         [TestTraits(Trait.Dates)]
         public void BetweenDates()
@@ -25,6 +28,51 @@ namespace RangeUnitTest
             
         }
         
+        /// <summary>
+        /// Get first three numbers
+        /// </summary>
+        [TestMethod]
+        [TestTraits(Trait.Numbers)]
+        public void BetweenInts_FirstThree()
+        {
+            List<int> list = new() { 1, 2, 3, 4, 5 };
+
+            var firstThree = list.ToArray()[..3];
+
+            foreach (var value in firstThree)
+            {
+                Debug.WriteLine(value);
+            }
+
+
+        }
+        
+        /// <summary>
+        /// Get last three numbers and get last number
+        /// </summary>
+        [TestMethod]
+        [TestTraits(Trait.Numbers)]
+        public void BetweenInts_LastThree()
+        {
+            List<int> list = new() { 1, 2, 3, 4, 5 };
+
+            // (^) hat, meaning start from last element, pickup last three
+            var firstThree = list.ToArray()[^3..];
+
+            foreach (var value in firstThree)
+            {
+                Debug.WriteLine(value);
+            }
+
+            Debug.WriteLine("Last element = 5");
+            
+            Debug.WriteLine(list.ToArray()[^1]);
+
+        }
+
+        /// <summary>
+        /// Get numbers between two numbers using GetRange.
+        /// </summary>
         [TestMethod]
         [TestTraits(Trait.Numbers)]
         public void BetweenInts()
@@ -41,6 +89,10 @@ namespace RangeUnitTest
             
         }
 
+        /// <summary>
+        /// Get contacts between two contacts first/last names inclusive
+        /// Assert using a EqualityComparer
+        /// </summary>
         [TestMethod]
         [TestTraits(Trait.Contacts)]
         public void BetweenContacts_1()
@@ -84,11 +136,20 @@ namespace RangeUnitTest
              */
             var lastContact = new ContactName() { FirstName = "Elizabeth", LastName = "Brown" };
 
+            /*
+             * Get contacts from json file
+             */
             var contactsArray = MockedData.ReadContacts().ToArray();
             var contacts = contactsArray.ContactsListIndices();
 
+            /*
+             * Get start and end indices
+             */
             var (startIndex, endIndex) = contacts.BetweenContacts(firstContact, lastContact);
             
+            /*
+             * Get array of contacts
+             */
             var citiesBetweenTwoCities = contactsArray[startIndex..endIndex];
             
             Assert.IsTrue(
@@ -227,6 +288,10 @@ namespace RangeUnitTest
                     .SequenceEqual(ExpectedCities));
 
         }
+
+        /// <summary>
+        /// Get cities between two cities were the indexes are hard coded e.g. [4..^360]
+        /// </summary>
         [TestMethod]
         [TestTraits(Trait.Cities)]
         public void BetweenCities_3()
@@ -241,6 +306,9 @@ namespace RangeUnitTest
                     .SequenceEqual(ExpectedCities));
         }
 
+        /// <summary>
+        /// Hard coded get cities using Range.EndAt
+        /// </summary>
         [TestMethod]
         [TestTraits(Trait.Strings)]
         public void StringArray_StartFrom_Index()
@@ -252,6 +320,9 @@ namespace RangeUnitTest
             Assert.IsTrue(fiveCities.SequenceEqual(FiveCitiesFromIndex));   
         }
 
+        /// <summary>
+        /// Hard coded get cities using Range.StartAt
+        /// </summary>
         [TestMethod]
         [TestTraits(Trait.Strings)]
         public void StringArray_StartFrom_Beginning()
@@ -266,7 +337,9 @@ namespace RangeUnitTest
 
         }
 
-
+        /// <summary>
+        /// Between two strings
+        /// </summary>
         [TestMethod]
         [TestTraits(Trait.RangesIndices)]
         public void BetweenPeriod()
