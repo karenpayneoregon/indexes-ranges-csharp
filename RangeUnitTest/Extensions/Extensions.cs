@@ -9,6 +9,7 @@ namespace RangeUnitTest.Extensions
     {
         /// <summary>
         /// Get Indices for between two city names. Since city names are static there is no assertion on if a city exists.
+        /// So if either city does not exists an exception is thrown
         /// </summary>
         /// <param name="sender">List of <seealso cref="City"/></param>
         /// <param name="firstCity">First city name</param>
@@ -19,11 +20,40 @@ namespace RangeUnitTest.Extensions
         /// </remarks>
         public static (Index startIndex, Index endIndex) BetweenCities(this List<City> sender, string firstCity, string lastCity)
         {
+
             return
                 (
-                    sender.FirstOrDefault(name => name.Name == firstCity).StartIndex,
-                    sender.FirstOrDefault(x => x.Name == lastCity).EndIndex
+                    sender.FirstOrDefault(name => name.Name.EqualsIgnoreCase(firstCity)).StartIndex,
+                    sender.FirstOrDefault(x => x.Name.EqualsIgnoreCase(lastCity)).EndIndex
                 );
+
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="firstCity"></param>
+        /// <param name="lastCity"></param>
+        /// <returns></returns>
+        public static (Index startIndex, Index endIndex, bool failed) BetweenCitiesSafe(this List<City> sender, string firstCity, string lastCity)
+        {
+
+            if (sender.FirstOrDefault(name => name.Name == firstCity) is not null && sender.FirstOrDefault(x => x.Name == lastCity) is not null)
+            {
+                return
+                (
+                    sender.FirstOrDefault(name => name.Name == firstCity).StartIndex,
+                    sender.FirstOrDefault(x => x.Name == lastCity).EndIndex, 
+                    false
+                );
+            }
+            else
+            {
+                return (new Index(), new Index(), true);
+            }
+            
+
+
         }
         /// <summary>
         /// Get Indices for between two contacts.

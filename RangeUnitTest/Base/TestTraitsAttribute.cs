@@ -8,7 +8,8 @@ namespace RangeUnitTest.Base
     public enum Trait
     {
         PlaceHolder,
-        RangesIndices
+        RangesIndices,
+        CreateTextFile
     }
     /// <summary>
     /// Declarative class for using Trait enum about for traits on test method.
