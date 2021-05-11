@@ -1,4 +1,4 @@
-# C# 8 Ranges and Indices
+# C# 8 Ranges and Indices in detail
 
 ![img](RangeUnitTest/assets/unitTesting.png) ![img](RangeUnitTest/assets/Versions.png)
 
