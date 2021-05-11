@@ -15,7 +15,7 @@ namespace RangeUnitTest
     public partial class MainTest : TestBase
     {
         [TestMethod]
-        [TestTraits(Trait.RangesIndices)]
+        [TestTraits(Trait.Dates)]
         public void BetweenDates()
         {
             var dates = DateRange.BetweenDates(StartDate, EndDate);
@@ -26,7 +26,7 @@ namespace RangeUnitTest
         }
         
         [TestMethod]
-        [TestTraits(Trait.RangesIndices)]
+        [TestTraits(Trait.Numbers)]
         public void BetweenInts()
         {
             List<int> list = new() { 1, 2, 3, 4, 5 };
@@ -42,7 +42,7 @@ namespace RangeUnitTest
         }
 
         [TestMethod]
-        [TestTraits(Trait.RangesIndices)]
+        [TestTraits(Trait.Contacts)]
         public void BetweenContacts_1()
         {
             /*
@@ -60,10 +60,10 @@ namespace RangeUnitTest
 
             var (startIndex, endIndex) = contacts.BetweenContacts(firstContact, lastContact);
 
-            var citiesBetweenTwoCities = contactsArray[startIndex..endIndex];
+            var contactsBetweenTwo = contactsArray[startIndex..endIndex];
             
             Assert.IsTrue(
-                citiesBetweenTwoCities
+                contactsBetweenTwo
                     .SequenceEqual(
                         ExpectedContacts, 
                             new ContactIdFirstNameLastNameEqualityComparer()));
@@ -71,7 +71,7 @@ namespace RangeUnitTest
         }
 
         [TestMethod]
-        [TestTraits(Trait.RangesIndices)]
+        [TestTraits(Trait.Contacts)]
         public void BetweenContacts_2()
         {
             /*
@@ -98,6 +98,8 @@ namespace RangeUnitTest
                             new ContactIdFirstNameLastNameEqualityComparer()));
 
         }
+        #region Helpers
+
         /// <summary>
         /// Creates a visual for indices for Oregon Cities which can be found under the [Dump] folder
         /// </summary>
@@ -118,25 +120,27 @@ namespace RangeUnitTest
              * Seed for City Id property as there are no id's in the text file
              */
             var id = 1;
-            
+
             foreach (var city in cities)
             {
                 city.Id = id;
                 sb.AppendLine($"{city.Id,4}{city.Name,25},{city.StartIndex,5}{city.EndIndex,11}");
-                
+
                 id++;
-                
+
             }
 
             File.WriteAllText("cities.txt", sb.ToString());
         }
-        
+
+        #endregion
+
         /// <summary>
         /// Hard-wired for Aloha to Ashland were in this case if the city names
         /// change, removed or added this will fail.
         /// </summary>
         [TestMethod]
-        [TestTraits(Trait.RangesIndices)]
+        [TestTraits(Trait.Cities)]
         public void BetweenCities_1()
         {
 
@@ -162,7 +166,7 @@ namespace RangeUnitTest
         ///             Here we tell the test engine an exception is expected
         /// </summary>
         [TestMethod]
-        [TestTraits(Trait.RangesIndices)]
+        [TestTraits(Trait.Cities)]
         [ExpectedException(typeof(NullReferenceException), "yep, unsafe")]
         public void BetweenCities_2_UnSafe()
         {
@@ -195,8 +199,6 @@ namespace RangeUnitTest
             startCity = "aloh";
             (_, _) = cities.BetweenCities(startCity, endCity);
 
-
-
         }
         /// <summary>
         /// A variation of <see cref="BetweenCities_2_UnSafe"/>
@@ -204,7 +206,7 @@ namespace RangeUnitTest
         /// of the tuple to indicate if both start and end city exists.
         /// </summary>
         [TestMethod]
-        [TestTraits(Trait.RangesIndices)]
+        [TestTraits(Trait.Cities)]
         public void BetweenCities_2_Safe()
         {
             string startCity = "Aloha";
@@ -226,7 +228,7 @@ namespace RangeUnitTest
 
         }
         [TestMethod]
-        [TestTraits(Trait.RangesIndices)]
+        [TestTraits(Trait.Cities)]
         public void BetweenCities_3()
         {
             string[] oregonCities = FileOperations.OregonCities();
@@ -240,6 +242,7 @@ namespace RangeUnitTest
         }
 
         [TestMethod]
+        [TestTraits(Trait.Strings)]
         public void StringArray_StartFrom_Index()
         {
             string[] oregonCities = FileOperations.OregonCitiesFirstTen();
@@ -250,6 +253,7 @@ namespace RangeUnitTest
         }
 
         [TestMethod]
+        [TestTraits(Trait.Strings)]
         public void StringArray_StartFrom_Beginning()
         {
             Range range = Range.EndAt(5);

@@ -9,7 +9,12 @@ namespace RangeUnitTest.Base
     {
         PlaceHolder,
         RangesIndices,
-        CreateTextFile
+        CreateTextFile,
+        Contacts,
+        Cities,
+        Strings,
+        Dates,
+        Numbers
     }
     /// <summary>
     /// Declarative class for using Trait enum about for traits on test method.
