@@ -34,7 +34,7 @@ public enum Trait
 # Documentation
 
 - Each unit test describes it's intent and verified with assertions.
-- Some test use IEqualityComparer&lt;T&gt; to compare actual results with expected results as shown below.
+- Some test use [IEqualityComparer](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.iequalitycomparer-1?view=net-5.0)&lt;T&gt; to compare actual results with expected results as shown below.
 
 ```csharp
 using System;
