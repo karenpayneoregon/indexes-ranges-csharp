@@ -16,7 +16,8 @@ namespace RangeUnitTest
         [TestInitialize]
         public void Init()
         {
-            if (TestContext.TestName == "TestMethod1")
+            // better than a static string
+            if (TestContext.TestName == nameof(BetweenDates))
             {
                 
             }
@@ -24,7 +25,8 @@ namespace RangeUnitTest
         [TestCleanup]
         public void TestCleanup()
         {
-            if (TestContext.TestName == "TestMethod1")
+            // see above
+            if (TestContext.TestName == "BetweenDates")
             {
 
             }
@@ -51,8 +53,12 @@ namespace RangeUnitTest
         }
 
         public DateTime StartDate => new(Now.Year, Now.Month, 3, 3, 0, 0, 0);
+        
         public DateTime EndDate => new(Now.Year, Now.Month, 6, 6, 0, 0, 0);
-        public List<DateTime> DateRange => Enumerable.Range(1, 20).Select(value => new DateTime(Now.Year, Now.Month, value, 1, 0, 0, 0)).ToList();
+        
+        public List<DateTime> DateRange => Enumerable.Range(1, 20).Select(value => 
+            new DateTime(Now.Year, Now.Month, value, 1, 0, 0, 0)).ToList();
+        
         public List<string> Periods => new()
         {
             "2010 Fya",
