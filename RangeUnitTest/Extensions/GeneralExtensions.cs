@@ -7,6 +7,11 @@ namespace RangeUnitTest.Extensions
 {
     public static class GeneralExtensions
     {
+        public static List<T> GetRange<T>(this List<T> list, Range range)
+        {
+            var (start, length) = range.GetOffsetAndLength(list.Count);
+            return list.GetRange(start, length);
+        }
 
         public static List<City> CityListIndices(this string[] citiesArray)
         {

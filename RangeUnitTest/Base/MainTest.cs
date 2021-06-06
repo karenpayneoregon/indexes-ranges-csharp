@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -51,6 +52,8 @@ namespace RangeUnitTest
         {
             await Task.Delay(0);
         }
+
+        public static List<string> MonthNames() => Enumerable.Range(1, 12).Select((index) => DateTimeFormatInfo.CurrentInfo.GetMonthName(index)).ToList();
 
         public DateTime StartDate => new(Now.Year, Now.Month, 3, 3, 0, 0, 0);
         

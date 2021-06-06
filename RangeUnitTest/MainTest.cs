@@ -33,40 +33,76 @@ namespace RangeUnitTest
         /// </summary>
         [TestMethod]
         [TestTraits(Trait.Numbers)]
-        public void BetweenInts_FirstThree()
+        public void BetweenIntegers_FirstThree()
         {
             List<int> list = new() { 1, 2, 3, 4, 5 };
+            List<int> expected = new() { 1, 2, 3 };
 
-            var firstThree = list.ToArray()[..3];
+            var firstThree1 = list.ToArray()[..3];
+            CollectionAssert.AreEqual(firstThree1,expected);
+            
+            var firstThree2 = list.GetRange(..3);
+            CollectionAssert.AreEqual(firstThree2, expected);
 
-            foreach (var value in firstThree)
-            {
-                Debug.WriteLine(value);
-            }
-
+            var firstThree3 = list.GetRange(new Range(0,^2));
+            CollectionAssert.AreEqual(firstThree3, expected);
 
         }
+
+        [TestMethod]
+        public void GetRangeDetailsGeneric()
+        {
+            List<int> integerList = new() { 1, 2, 3, 4, 5 };
+            var integerContainers = Helpers.RangeDetails(integerList);
+
+            foreach (var container in integerContainers)
+            {
+                Debug.WriteLine($"{container.Value}, {container.StartIndex}, {container.EndIndex}");
+            }
+
+            Debug.WriteLine("");
+            var stringContainers = Helpers.RangeDetails(MonthNames());
+            StringBuilder builder = new ();
+            foreach (var container in stringContainers)
+            {
+                builder.AppendLine($"{container.Value,-12} {container.StartIndex,-6} {container.EndIndex}");
+            }
+            
+            File.WriteAllText("Months.txt", builder.ToString());
+
+        }
+
         
         /// <summary>
         /// Get last three numbers and get last number
         /// </summary>
         [TestMethod]
         [TestTraits(Trait.Numbers)]
-        public void BetweenInts_LastThree()
+        public void BetweenIntegers_LastThree()
         {
             List<int> list = new() { 1, 2, 3, 4, 5 };
+            List<int> expected = new() { 3, 4, 5 };
 
             // (^) hat, meaning start from last element, pickup last three
-            var firstThree = list.ToArray()[^3..];
-
-            foreach (var value in firstThree)
+            var lastThree = list.ToArray()[^3..^0];
+            CollectionAssert.AreEqual(lastThree,expected);
+            foreach (var value in lastThree)
             {
                 Debug.WriteLine(value);
             }
 
-            Debug.WriteLine("Last element = 5");
+            Debug.WriteLine("");
             
-            Debug.WriteLine(list.ToArray()[^1]);
+            var lastThreeGeneric = list.GetRange(^3..^0);
+            CollectionAssert.AreEqual(lastThreeGeneric, expected);
+
+            foreach (var value in lastThreeGeneric)
+            {
+                Debug.WriteLine(value);
+            }
+
+            //Debug.WriteLine("Last element = 5");
+            //Debug.WriteLine(list.ToArray()[^1]);
 
         }
 
